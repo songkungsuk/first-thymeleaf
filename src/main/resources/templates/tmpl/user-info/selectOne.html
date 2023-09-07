@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td>#</td>
+        <td id="uiNum"></td>
+      </tr>
+      <tr>
+        <td>이름</td>
+        <td id="uiName"></td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td id="uiId"></td>
+      </tr>
+      <tr>
+        <td>비밀번호</td>
+        <td id="uiPwd"></td>
+      </tr>
+    </table>
+    <button onclick="location.href='/tmpl/user-info/update.html'">유저 수정</button>
+    <button onclick="deleteUserInfo()">유저 삭제</button>
+    <script>
+      const url = new URL(location.href);
+      const param = url.searchParams;
+      const uiNum = param.get("uiNum");
+
+      window.addEventListener("load", async function () {
+        const res = await fetch(`http://localhost/user-infos/${uiNum}`);
+        const json = await res.json();
+        for (let key in json) {
+          if (document.querySelector("#" + key)) {
+            document.querySelector("#" + key).innerHTML = json[key];
+          }
+        }
+      });
+
+      
+      async function deleteUserInfo(){
+        const res = await fetch(`http://localhost/user-infos/${uiNum}`,{
+            method:'DELETE'
+        })
+        const result = await res.text();
+        if(result == 1){
+            alert('유저삭제완료');
+            location.href='/tmpl/user-info/select'
+        }else{
+            alert('삭제실패');
+        }
+      }
+    </script>
+  </body>
+</html>

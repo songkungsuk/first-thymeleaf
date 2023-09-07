@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td>#</td>
+        <td>이름</td>
+        <td>아이디</td>
+      </tr>
+      <tbody id="users"></tbody>
+    </table>
+    <button onclick="location.href='/tmpl/user-info/insert'">유저 추가</button>
+    <script>
+      window.addEventListener('load', async function () {
+        const res = await fetch('http://localhost/user-infos');
+        const json = await res.json();
+        let html = '';
+        for (let key of json) {
+          html += '<tr>';
+          html += `<td>${key.uiNum}</td>`;
+          html += `<td><a href="/tmpl/user-info/selectOne.html?uiNum=${key.uiNum}">${key.uiName}<a></td>`;
+          html += `<td>${key.uiId}</td>`;
+          html += '</tr>';
+        }
+        document.querySelector('#users').innerHTML = html;
+      });
+
+    </script>
+  </body>
+</html>

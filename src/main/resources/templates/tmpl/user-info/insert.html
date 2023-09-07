@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    이름 : <input type="text" id="uiName" placeholder="이름" /> <br />
+    아이디 : <input type="text" id="uiId" placeholder="아이디" /> <br />
+    비밀번호 : <input type="text" id="uiPwd" placeholder="비밀번호" /> <br />
+    <button onclick="insertUser()">유저 추가</button>
+
+    <script>
+      async function insertUser() {
+        const data = {
+          uiName: document.querySelector('#uiName').value,
+          uiId: document.querySelector('#uiId').value,
+          uiPwd: document.querySelector('#uiPwd').value
+        }
+
+        const json = JSON.stringify(data);
+        console.log(json);
+
+        const res = await fetch("http://localhost/user-infos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: json,
+        });
+
+        const result = await res.text();
+        if (result == 1) {
+          alert("유저 추가완료");
+          location.href = "/tmpl/user-info/select";
+        } else {
+          alert("유저 추가 실패");
+        }
+      }
+    </script>
+  </body>
+</html>

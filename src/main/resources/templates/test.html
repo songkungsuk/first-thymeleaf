@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    name : <span th:text="${name}"></span> <br>
+    age : <span th:text="${age}"></span> <br>
+    이름 : <input type="text" th:value="${name}">
+    나이 : <input type="text" th:value="${age}">
+    <img src="@{/imgs/img.jpg}" alt="goyangee">
+</body>
+</html>
