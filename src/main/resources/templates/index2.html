@@ -9,6 +9,7 @@
     안녕하세요 ㅌ ㅏ 임 리프입니다
     <div th:if="${session.user == null}">
         <a href="/tmpl/user-info/login">login</a>
+        <a href="/join.html">회원가입</a>
     </div >
     <div th:if="${session.user !=null}">
         <span th:text="${session.user.uiName}"></span>님 안녕하세요
