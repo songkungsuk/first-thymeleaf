@@ -7,10 +7,33 @@
   </head>
   <body>
     <form method="post" action="/login">
-      <input type="text" name="uiId" /> <br />
-      <input type="text" name="uiPwd" /><br />
+      <input type="text" name="uiId" id="uiId" /> <br />
+      <input type="text" name="uiPwd" id="uiPwd" /><br />
       <div class="error-div" th:text="${msg}"></div>
-      <button>로그인</button>
+      <button type="button" onclick="login()">로그인</button>
     </form>
+
+    <script>
+      async function login() {
+        const data = {
+          uiId: document.querySelector("#uiId").value,
+          uiPwd: document.querySelector("#uiPwd").value,
+        };
+        const json = JSON.stringify(data);
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
+          body: json
+        });
+        const answer = await res.json();
+        console.log(answer)
+        alert(answer.msg);
+        if (answer.url) {
+          location.href = answer.url;
+        }
+      }
+    </script>
   </body>
 </html>

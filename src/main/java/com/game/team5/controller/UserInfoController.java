@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.team5.service.UserInfoService;
+import com.game.team5.vo.MsgVO;
 import com.game.team5.vo.UserInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,24 +34,27 @@ public class UserInfoController {
     }
 
     @PostMapping("/login")
-    public String login(UserInfoVO user, Model m, HttpSession session) {
+    public MsgVO login(@RequestBody UserInfoVO user, MsgVO msg, HttpSession session) {
         log.info("user->{}", user);
 
         UserInfoVO check = uiService.login(user);
-        if (check == null) {
-            m.addAttribute("msg", "id또는 pw를 확인해주세요");
-        } else {
-            m.addAttribute("msg", "login성공");
+        msg.setMsg("아이디 비밀번호를 확인해주세요");
+        if (check != null) {
+
+            msg.setMsg("로그인성공");
+            msg.setUrl("/");
+            // msg.setSucces(true);
             session.setAttribute("user", check);
-            return "/index";
+
+            return msg;
         }
 
-        return "tmpl/user-info/login";
+        return msg;
     }
 
     @GetMapping("/user-infos/{uiNum}")
     public UserInfoVO getUser(@PathVariable int uiNum) {
-       return uiService.getUser(uiNum);
+        return uiService.getUser(uiNum);
     }
 
     @PostMapping("/user-infos")

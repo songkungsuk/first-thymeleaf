@@ -24,7 +24,7 @@
         <td id="uiPwd"></td>
       </tr>
     </table>
-    <button onclick="location.href='/tmpl/user-info/update.html'">유저 수정</button>
+    <button onclick="location.href=`/tmpl/user-info/update.html?uiNum=${uiNum}`">유저 수정</button>
     <button onclick="deleteUserInfo()">유저 삭제</button>
     <script>
       const url = new URL(location.href);

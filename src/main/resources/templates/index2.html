@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    안녕하세요 ㅌ ㅏ 임 리프입니다
+    <div th:if="${session.user == null}">
+        <a href="/tmpl/user-info/login">login</a>
+    </div >
+    <div th:if="${session.user !=null}">
+        <span th:text="${session.user.uiName}"></span>님 안녕하세요
+    </div>
+    
+</body>
+</html>

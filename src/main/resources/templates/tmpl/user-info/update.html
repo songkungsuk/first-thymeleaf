@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    이름 : <input type="text" id="uiName" placeholder="이름"> <br>
+    아이디 : <input type="text" id="uiId" placeholder="아이디"> <br>
+    비밀번호 : <input type="text" id="uiPwd" placeholder="비밀번호"> <br>
+
+    <script>
+      const url = new URL(location.href);
+      const param = url.searchParams;
+      const uiNum = param.get("uiNum");
+
+      window.addEventListener("load", async function () {
+        const data = {
+          uiNum: uiNum,
+          uiName: document.querySelector('#uiName').value,
+          uiId: document.querySelector('#uiId').value,
+          uiPwd: document.querySelector('#uiPwd').value,
+        };
+      });
+    </script>
+  </body>
+</html>
